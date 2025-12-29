@@ -7,7 +7,7 @@ import type {
 import { useFetcher } from "react-router";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { authenticate } from "../shopify.server";
-import { createProductFlow } from "../services/productService";
+import { productService } from "../services/productService";
 import { boundary } from "@shopify/shopify-app-react-router/server";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -19,7 +19,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 export const action = async ({ request }: ActionFunctionArgs) => {
   const { admin } = await authenticate.admin(request);
 
-  return await createProductFlow(admin);
+  return await productService.createProductFlow(admin);
 };
 
 export default function Index() {
